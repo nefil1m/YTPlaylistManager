@@ -1,0 +1,16 @@
+$primary:  #2196f3;
+$dark-grey: #bbb;
+$accent: #b71c1c;
+
+$cb-anim: cubic-bezier(0,0,.12,1);
+
+$th-size: 250px;
+
+@mixin animation-mixin($animation-name, $delay, $duration) {
+  animation-name: $animation-name;
+  animation-duration: $duration;
+  animation-delay: $delay;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: $cb-anim;
+}

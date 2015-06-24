@@ -1,12 +1,4 @@
-/old
-/old/*
 .gitignore
 .gitattributes
-/node_modules
 /node_modules/*
-/src/libs
-/src/libs/*
-/src/min/
-/src/min/*
-/build
-/build/*
+/dist/*

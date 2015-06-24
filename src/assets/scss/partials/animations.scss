@@ -1,0 +1,25 @@
+@import './vars.scss';
+
+@keyframes playlist-open {
+  0% {
+    width: $th-size;
+  }
+
+  100% {
+    width: 100%;
+    left: 0;
+    z-index: 100;
+  }
+}
+
+@keyframes playlist-videos-open {
+  0% {
+    max-height: 0;
+    visibility: hidden;
+  }
+
+  100% {
+    max-height: 1000px;
+    visibility: visible;
+  }
+}

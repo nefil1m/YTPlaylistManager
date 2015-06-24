@@ -1,0 +1,94 @@
+@import 'vars.scss';
+
+.control-panel {
+  position: fixed;
+  left: 25px;
+  bottom: 25px;
+  background-color: #eee;
+
+  &:hover {
+    width: auto;
+  }
+
+  .md-button.md-icon-button {
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
+  }
+
+  .control-panel-top {
+    background: $primary;
+    padding-top: 5px;
+    color: #fff;
+    font-size: 12px;
+
+    .title-container {
+      max-width: 100%;
+      width: 195px;
+      height: 15px;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-top: 3px;
+      position: relative;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      margin: -3px 3px 3px 3px;
+    }
+  }
+
+  .control-panel-buttons {
+    white-space: nowrap;
+  }
+
+  .video-progress {
+    height: 3px;
+    background: $dark-grey;
+    transition: height .3s $cb-anim;
+
+    &:hover {
+      height: 10px;
+    }
+
+    > div {
+      height: 100%;
+    }
+
+    .video-progress-fg {
+      background: $accent;
+      transition: width .3s $cb-anim;
+    }
+  }
+
+  .volume-wrapper {
+    display: inline-block;
+    width: 42px;
+    height: 32px;
+    overflow: hidden;
+    position: relative;
+    top: 8px;
+    margin-top: -8px;
+    margin-left: -5px;
+    transition: all .3s $cb-anim;
+
+    &:hover {
+      width: 145px;
+    }
+
+    md-slider,
+    md-button {
+      display: inline-block;
+    }
+
+    md-slider {
+      width: 75px;
+      height: auto;
+      top: -29px;
+      cursor: pointer;
+    }
+  }
+}

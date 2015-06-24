@@ -1,0 +1,198 @@
+@import 'vars.scss';
+@import 'animations.scss';
+
+// default styles (1280px width and more)
+#playlist-container {
+  max-width: 1100px;
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  top: 25%;
+
+  .playlists-row {
+    height: $th-size;
+    margin-bottom: 25px;
+
+    @for $i from 0 through 4 {
+      .playlist:nth-child(#{$i + 1}n) {
+        left: ($th-size * $i) + (25px * $i);
+      }
+    }
+  }
+
+  .playlist {
+    position: absolute;
+    float: left;
+    width: $th-size;
+    transition: all .5s $cb-anim;
+    background: #eee;
+    top: auto;
+    overflow: hidden;
+
+    &.opening,
+    &.opened,
+    &.closing {
+      z-index: 10;
+    }
+
+    &.opening,
+    &.opened {
+      width: 100%;
+      left: 0 !important;
+      top: 0;
+
+      .playlist-thumbnail:hover p {
+        bottom: -50px;
+      }
+
+      .playlist-videos {
+        @include animation-mixin(playlist-videos-open, .5s, 10s);
+      }
+    }
+
+    &.closing {
+      width: $th-size;
+
+      @for $i from 0 through 3 {
+        &:nth-child(#{$i + 1}n) {
+          left: ($th-size * $i) + (25px * $i) !important;
+        }
+      }
+    }
+  }
+
+  .top-section {
+    max-height: $th-size;
+    transition: all .5s $cb-anim;
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+  }
+
+  .playlist-thumbnail {
+    width: $th-size;
+    height: $th-size;
+    max-width: $th-size;
+    max-height: $th-size;
+    min-width: $th-size;
+    min-height: $th-size;
+    background-size: cover;
+    background-position: center center;
+    transition: all .5s $cb-anim;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    p {
+      position: absolute;
+      bottom: -50px;
+      text-align: center;
+      color: #fff;
+      margin: 0;
+      padding: 10px;
+      width: $th-size - 20px;
+      box-shadow: 0px -40px 40px -5px rgba(0, 0, 0, 0.5) inset;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: bottom .3s $cb-anim;
+    }
+
+    //.playlist-thumbnail
+    &:hover {
+      p {
+        bottom: 0;
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: rgba(0,0,0,.7);
+    transition: color .3s $cb-anim;
+
+    &:hover {
+      color: rgba(0,0,0,1);
+    }
+  }
+
+  .playlist-info {
+    padding: 32px;
+    width: 100%;
+
+    .input-wrapper {
+      width: 750px;
+      min-height: 30px;
+      margin-bottom: 16px;
+
+      ng-md-icon,
+      input,
+      textarea {
+        float: left;
+      }
+
+      ng-md-icon {
+        opacity: 0;
+        transition: opacity .3s $cb-anim;
+        margin-right: 8px;
+        cursor: pointer;
+      }
+
+      &:hover {
+        ng-md-icon {
+          opacity: 1;
+        }
+      }
+    }
+
+    .playlist-description {
+      resize: none;
+      height: 84px;
+    }
+
+    input,
+    textarea {
+      width: 716px;
+    }
+
+    input[readonly],
+    textarea[readonly] {
+      background: #eee;
+      border: none;
+      overflow: hidden;
+    }
+  }
+
+  .playlist-videos {
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all .5s $cb-anim;
+  }
+}
+
+/*
+ *
+ *
+ *
+ *
+ *
+ *  TODO:
+ *  @media queries for thumbnail sizes etc
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */

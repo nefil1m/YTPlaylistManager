@@ -1,53 +1,54 @@
-  <!doctype html>
+<!doctype html>
 <html lang="en" ng-app="YTPlaylistManager">
-  <head>
-    <title>YT - PlaylistManager</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>YT - PlaylistManager</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://apis.google.com/js/client:platform.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+  <link rel="stylesheet" href="/assets/libs/angular-material/angular-material.min.css">
+  <link rel="stylesheet" href="/assets/css/global.css">
 
-    <link rel="Shortcut Icon" href="img/fav.gif">
+  <link rel="Shortcut Icon" href="/assets/img/fav.gif">
+</head>
+<body ng-controller="mainCtrl">
 
-    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-  </head>
-  <body ng-controller="mainCtrl">
+  <section class="player-container">
+    <div id="player"></div>
+    <div class="player-overlay" ng-class="{darken: !!openedPlaylist}"></div>
+  </section>
+
+  <md-button ng-click="toggleSidenav()" class="md-icon-button sidenav-toggler md-primary" aria-label="menu">
+    <ng-md-icon icon="menu" size="32"></ng-md-icon>
+  </md-button>
+
+  <main-sidebar></main-sidebar>
+
+  <control-panel></control-panel>
+
+  <section id="playlist-container">
+
+    <div class="playlists-row">
+      <playlist />
+    </div>
+
+  </section>
 
 
-    <div ui-view></div>
+  <div class="preloader-wrapper">
+    <md-progress-circular md-mode="indeterminate" class="main-preloader"></md-progress-circular>
+  </div>
 
-    <script src="//localhost:35729/livereload.js"></script>
-
-    <!-- scripts -->
-    <script src="libs/jquery/dist/jquery.min.js"></script>
-    <script src="libs/jquery/src/sizzle/dist/sizzle.min.js"></script>
-    <script src="libs/angular/angular.min.js"></script>
-    <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="libs/angular-animate/angular-animate.min.js"></script>
-    <script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="libs/angular-cookies/angular-cookies.min.js"></script>
-    <script src="libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
-    <script src="libs/angular-route/angular-route.min.js"></script>
-    <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/routes.js"></script>
-    <script src="js/services/YTResourceProvider.js"></script>
-    <script src="js/services/channelSrvc.js"></script>
-    <script src="js/directives/playlist-grid/playlist-grid.js"></script>
-    <script src="js/directives/playlist-list/playlist-list.js"></script>
-    <script src="js/directives/yt-item-grid/yt-item-grid.js"></script>
-    <script src="js/directives/yt-item-list/yt-item-list.js"></script>
-    <script src="js/controllers/loginCtrl.js"></script>
-    <script src="js/controllers/mainCtrl.js"></script>
-    <script src="js/controllers/modalCtrl.js"></script>
-    <script src="js/controllers/playerCtrl.js"></script>
-    <script src="js/controllers/playlistCtrl.js"></script>
-    <script src="js/controllers/searchCtrl.js"></script>
-    <script src="js/controllers/settingsCtrl.js"></script>
-    <script src="js/controllers/videosCtrl.js"></script>
-    <!-- /scripts -->
-  </body>
+  <script src="//localhost:35729/livereload.js"></script>
+  <script src="https://apis.google.com/js/client:platform.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="/assets/libs/angular/angular.min.js"></script>
+  <script src="/assets/libs/angular-aria/angular-aria.min.js"></script>
+  <script src="/assets/libs/angular-animate/angular-animate.min.js"></script>
+  <script src="/assets/libs/angular-material/angular-material.min.js"></script>
+  <script src="/assets/libs/angular-material-icons/angular-material-icons.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
+  <script src="/assets/libs/jquery/jquery.min.js"></script>
+  <script src="/js/app.js"></script>
+</body>
 </html>
