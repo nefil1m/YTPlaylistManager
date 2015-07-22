@@ -1,0 +1,26 @@
+<div class="playlist md-whiteframe-z3 opened">
+  <div class="top-section">
+    <div class="playlist-thumbnail" ng-style="{'background-image': 'url(../assets/img/noth.png)'}" ng-click="togglePlaylist($event)">
+      <p>Sample Playlist1</p>
+    </div>
+    <span class="close" ng-click="togglePlaylist($event)">
+      <ng-md-icon icon="close" size="32"></ng-md-icon>
+    </span>
+    <div class="playlist-info">
+      <div class="input-wrapper">
+        <ng-md-icon icon="edit" size="16"></ng-md-icon>
+        <input type="text" readonly disabled value="Sample Playlist1" class="playlist-title" />
+      </div>
+      <div class="input-wrapper">
+        <ng-md-icon icon="edit" size="16"></ng-md-icon>
+        <textarea readonly disabled class="playlist-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt eaque illo, possimus incidunt temporibus maiores praesentium inventore molestiae architecto eligendi quae veritatis, sed? Exercitationem molestiae id nobis aperiam, ratione quibusdam fugiat ab eos sapiente expedita dolore est rem, consectetur cum perferendis totam libero facere iure vitae minus et similique tempore!</textarea>
+      </div>
+    </div>
+  </div>
+  <md-list class="playlist-videos">
+    <!-- <md-list-item>mock</md-list-item>
+    <md-list-item>mock</md-list-item>
+    <md-list-item>mock</md-list-item>
+    <md-list-item>mock</md-list-item> -->
+  </md-list>
+</div>

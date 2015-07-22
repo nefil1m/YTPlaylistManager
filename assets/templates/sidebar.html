@@ -1,0 +1,48 @@
+  <md-sidenav md-component-id="sidenav">
+
+    <div class="user-card" ng-if="info.authorized" ng-style="{'background-image': 'url({{info.bgPic}})'}">
+      <img ng-src="{{info.profilePic}}" alt="Profile Picture" class="md-whiteframe-z2">
+      <h4 ng-bind="info.username"></h4>
+    </div>
+
+    <md-list>
+
+      <md-list-item ng-click="login()" ng-if="!info.authorized">
+        <ng-md-icon icon="exit_to_app" size="24"></ng-md-icon>
+        <p>Login</p>
+      </md-list-item>
+
+      <md-list-item ng-click="toggleSettings()" ng-if="info.authorized">
+        <ng-md-icon icon="settings" size="24" options='{"duration": 350}'></ng-md-icon>
+        <p>Settings</p>
+        <ng-md-icon icon="{{settingsIcon}}" size="24" class="md-secondary"></ng-md-icon>
+      </md-list-item>
+
+      <div class="settings-content" ng-class="{open: settingsOpened}">
+        <md-list>
+
+          <md-list-item>
+            <p>Autologin</p>
+            <md-switch class="md-secondary" ng-model="options.autologin" ng-change="saveSettings()"></md-switch>
+          </md-list-item>
+
+          <md-list-item>
+            <p>Autoplay</p>
+            <md-switch class="md-secondary" ng-model="options.autoplay" ng-change="saveSettings()"></md-switch>
+          </md-list-item>
+
+        </md-list>
+      </div>
+
+      <md-list-item ng-click="showAbout($event)">
+        <ng-md-icon icon="info" size="24"></ng-md-icon>
+        <p>About</p>
+      </md-list-item>
+
+   <!--    <md-list-item ng-if="info.authorized" ng-click="logout()" class="logout-button">
+        <ng-md-icon icon="exit_to_app" size="24"></ng-md-icon>
+        <p>Logout</p>
+      </md-list-item> -->
+
+    </md-list>
+  </md-sidenav>

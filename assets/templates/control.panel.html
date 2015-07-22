@@ -1,0 +1,59 @@
+  <section id="control-panel" class="control-panel md-whiteframe-z2">
+
+    <div class="control-panel-top">
+      <div>
+        <ng-md-icon icon="open_with" draggable-elem="#control-panel">
+          <md-tooltip md-direction="top" md-autohide="true">
+            Drag
+          </md-tooltip>
+        </ng-md-icon>
+
+        <div class="title-container" ng-bind="currentVideo.snippet.title"></div>
+      </div>
+      <div class="video-progress" ng-click="changePlayingPosition($event)">
+        <div class="video-progress-fg" ng-style="{width: playPosition}" role="progressbar"></div>
+      </div>
+    </div>
+
+    <div class="control-panel-buttons">
+
+      <md-button class="md-icon-button" aria-label="Previous Video" ng-click="previousVideo()">
+        <md-tooltip md-direction="bottom" md-autohide="true">
+          Previous Video
+        </md-tooltip>
+        <ng-md-icon icon="skip_previous"></ng-md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="Play/Pause" ng-click="playPauseVideo()">
+        <md-tooltip md-direction="bottom" md-autohide="true">
+          Play/Pause
+        </md-tooltip>
+        <ng-md-icon icon="{{playStatusIcon}}" options='{"duration": 350, "rotation": "none"}'></ng-md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="Stop" ng-click="stopVideo()">
+        <md-tooltip md-direction="bottom" md-autohide="true">
+          Stop
+        </md-tooltip>
+        <ng-md-icon icon="stop"></ng-md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="Next Video" ng-click="nextVideo()">
+        <md-tooltip md-direction="bottom" md-autohide="true">
+          Next Video
+        </md-tooltip>
+        <ng-md-icon icon="skip_next"></ng-md-icon>
+      </md-button>
+
+      <div class="volume-wrapper">
+        <md-button class="md-icon-button volume-button" aria-label="Volume" ng-click="muteVideo()">
+          <md-tooltip md-direction="bottom" md-autohide="true">
+            Volume
+          </md-tooltip>
+          <ng-md-icon icon="{{volumeStatusIcon}}" options='{"duration": 350, "rotation": "none"}' ></ng-md-icon>
+        </md-button>
+        <md-slider class="md-primary" min="0" max="100" aria-label="volume" ng-model="playerVolume" ng-change="adjustVolume()"></md-slider>
+      </div>
+
+    </div>
+  </section>
