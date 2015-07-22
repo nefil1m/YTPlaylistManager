@@ -10,6 +10,7 @@ angular
       },
       activePlaylist: null,
       activeVideoIndex: 1,
+      playlists: [],
       mockPlaylist: {
         snippet: {
           title: 'Sample Playlist',

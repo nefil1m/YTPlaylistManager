@@ -31,6 +31,31 @@ angular
       return def.promise;
     };
 
+    YTResourceProvider.sendRequest = function(requestType, options) {
+      var def = $q.defer();
+
+      requestType = requestType.split('.');
+
+      var request = gapi.client.youtube[requestType[0]][requestType[1]](options);
+
+      request.execute(function(response) {
+        if(response.error) {
+          /*
+           *  TODO
+           *  HANDLE ERRORS
+           *
+           */
+           console.log(response)
+           def.reject();
+        } else {
+          console.log(response)
+          def.resolve(response);
+        }
+      });
+
+      return def.promise;
+    };
+
     // YTResourceProvider.logout = function() {
     //   gapi.auth.signOut();
     // };
