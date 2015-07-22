@@ -34,7 +34,7 @@ angular
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: '../assets/templates/sidebar.html',
+      templateUrl: 'assets/templates/sidebar.html',
       controller: 'sidebarCtrl'
     }
   })
@@ -43,7 +43,7 @@ angular
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: '../assets/templates/control.panel.html',
+      templateUrl: 'assets/templates/control.panel.html',
       controller: 'playerCtrl'
     }
   })
@@ -52,7 +52,7 @@ angular
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: '../assets/templates/playlist.html',
+      templateUrl: 'assets/templates/playlist.html',
       controller: 'playlistCtrl'
     }
   });
