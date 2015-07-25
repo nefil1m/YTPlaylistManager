@@ -31,6 +31,17 @@
             <md-switch class="md-secondary" ng-model="options.autoplay" ng-change="saveSettings()"></md-switch>
           </md-list-item>
 
+          <md-list-item>
+            <p>Video Quality</p>
+            <md-select ng-model="options.quality" ng-change="saveSettings()" placeholder="{{options.quality}}" aria-label="quality">
+              <md-option value="hd1080">1080p</md-option>
+              <md-option value="hd720">720p</md-option>
+              <md-option value="large">480p</md-option>
+              <md-option value="medium">360p</md-option>
+              <md-option value="small">240p</md-option>
+            </md-select>
+          </md-list-item>
+
         </md-list>
       </div>
 

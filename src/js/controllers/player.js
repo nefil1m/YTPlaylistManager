@@ -19,7 +19,7 @@ angular
         return channel.options.quality;
       }
 
-      var width = window.innerWidth;
+      var width = screen.width;
 
       if(width >= 1920)                   return 'hd1080';
       if(width < 1920 && width >= 1280)   return 'hd720';
@@ -33,6 +33,10 @@ angular
         $scope.playStatusIcon = 'pause';
       } else {
         $scope.playStatusIcon = 'play_arrow';
+      }
+
+      if(e.data == YT.PlayerState.BUFFERING) {
+        e.target.setPlaybackQuality($scope.videoQuality);
       }
 
       $scope.currentVideoDuration = $scope.player.getDuration();
@@ -52,9 +56,10 @@ angular
       }
     }
 
-    function setDefaultVars() {
+    function setDefaultVars(e) {
       $scope.currentVideoDuration = $scope.player.getDuration();
       $scope.playerVolume = $scope.player.getVolume();
+      e.target.setPlaybackQuality($scope.videoQuality);
 
       if(!channel.basicInfo.authorized) {
         channel.activePlaylist = channel.mockPlaylist;
@@ -92,6 +97,7 @@ angular
       $scope.player = new YT.Player('player', {
         height: '100%',
         width: '100%',
+        suggestedQuality: $scope.videoQuality,
         videoId: channel.mockPlaylist.videos[channel.activeVideoIndex].id,
         playerVars: {
           controls: 0,
