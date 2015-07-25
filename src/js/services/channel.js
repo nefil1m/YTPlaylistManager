@@ -6,7 +6,9 @@ angular
         authorized: false
       },
       options: {
-
+        autologin: false,
+        autoplay: false,
+        videoQuality: 'hd720'
       },
       activePlaylist: null,
       activeVideoIndex: 1,

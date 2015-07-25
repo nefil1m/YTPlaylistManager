@@ -2,11 +2,18 @@ angular
   .module('YTPlaylistManager')
   .run(function($rootScope, YTResourceProvider, channel) {
     $(window).load(function() {
+      var localOptions;
+
       $rootScope.$broadcast('pageLoaded');
 
-      var localOptions = JSON.parse(localStorage.options);
+      if(localStorage.options) {
+        localOptions = JSON.parse(localStorage.options);
+      }
+
       if(localOptions) {
         channel.options = localOptions;
+      } else {
+        localOptions = channel.options;
       }
 
       if(localOptions.autologin) {
@@ -25,6 +32,8 @@ angular
             $rootScope.$broadcast('loggedIn');
             $('.preloader-wrapper').fadeOut();
           });
+      } else {
+        $('.preloader-wrapper').fadeOut();
       }
     });
   });
