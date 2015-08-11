@@ -10,7 +10,7 @@ var prefixer = require('gulp-autoprefixer');
 var minifycss = require('gulp-minify-css');
 
 // js
-var concat = require('gulp-concat');
+var concat = require('gulp-concat-sourcemap');
 var annotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 
@@ -53,7 +53,7 @@ gulp
 
   .task('libs', function() {
     gulp
-      .src('./node_modules/angular/*.min.*')
+      .src('./node_modules/angular/*.js')
       .pipe(gulp.dest('./dist/assets/libs/angular/'));
 
     gulp
@@ -85,6 +85,5 @@ gulp
       gulp.run('scss');
       gulp.run('js');
       server.notify(event);
-      server.run(['index.js']);
     });
   })
