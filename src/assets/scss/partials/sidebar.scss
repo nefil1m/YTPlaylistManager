@@ -47,8 +47,6 @@ md-sidenav {
   transition: all .3s $cb-anim;
 
   &.open {
-    overflow: visible;
-
     // remeber to change this line after adding more items to settings
     height: 155px;
   }

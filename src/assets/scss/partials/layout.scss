@@ -1,3 +1,5 @@
+@import 'vars.scss';
+
 .player-overlay,
 .main-preloader,
 .player-container,
@@ -13,17 +15,27 @@
   transition: all .3s;
 
   &.darken {
-    background: rgba(0,0,0,.3);
+    background: rgba(0,0,0,.4);
+    z-index: 1;
   }
 }
 
 .main-preloader {
   top: 50%;
   left: 50%;
+  z-index: 181;
 }
 
-.sidenav-toggler {
+.md-button.md-icon-button.sidenav-toggler {
   position: fixed;
+  margin: 16px;
+  stroke: #fff;
+  color: #000;
+  opacity: .6;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 ng-md-icon {

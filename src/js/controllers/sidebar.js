@@ -32,9 +32,9 @@ angular
     $scope.showAbout = function(e) {
       $mdDialog.show({
         controller: 'aboutModalCtrl',
-        templateUrl: '/dist/assets/templates/about.modal.html',
+        templateUrl: 'assets/templates/about.modal.html',
         parent: angular.element(document.body),
-        targetEvent: e
+        targetEvent: e.target
       });
     };
 

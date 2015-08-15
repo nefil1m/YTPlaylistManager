@@ -8,26 +8,30 @@
   margin: 0 auto;
   position: relative;
   top: 25%;
+  display: flex;
+  flex-wrap: wrap;
 
-  .playlists-row {
-    height: $th-size;
-    margin-bottom: 25px;
+  > div {
+    width: $th-size + 25px;
+    height: $th-size + 25px;
 
-    @for $i from 0 through 4 {
-      .playlist:nth-child(#{$i + 1}n) {
-        left: ($th-size * $i) + (25px * $i);
+    @for $i from 0 through 3 {
+      &:nth-child(4n + #{$i + 1}) .opened,
+      &:nth-child(4n + #{$i + 1}) .opening {
+        left: -($th-size * $i) - (25px * $i);
       }
     }
   }
 
   .playlist {
-    position: absolute;
-    float: left;
+    position: relative;
+    top: 0;
+    left: 0;
     width: $th-size;
     transition: all .5s $cb-anim;
     background: #eee;
-    top: auto;
     overflow: hidden;
+    margin: 12.5px;
 
     &.opening,
     &.opened,
@@ -37,26 +41,65 @@
 
     &.opening,
     &.opened {
-      width: 100%;
-      left: 0 !important;
-      top: 0;
+      width: 1075px;
 
-      .playlist-thumbnail:hover p {
-        bottom: -50px;
+      .top-section {
+        border-bottom: 1px solid #ddd;
+      }
+
+      .playlist-thumbnail {
+        width: 445px;
+
+        &:hover {
+          background-position: center center;
+        }
+
+        p {
+          opacity: 0;
+        }
+      }
+
+      .playlist-info {
+        width: 600px;
+
+        .input-wrapper {
+          width: 550px;
+
+          textarea,
+          input {
+            width: 500px;
+          }
+        }
+      }
+
+      .close {
+        opacity: 1;
       }
 
       .playlist-videos {
-        @include animation-mixin(playlist-videos-open, .5s, 10s);
+        max-height: 10000px;
+        min-height: 80px;
+        padding: 16px 0 0 0;
+        visibility: visible;
+        transition: all 1s $cb-anim 0;
       }
     }
 
     &.closing {
       width: $th-size;
+      transition-delay: 1s;
 
       @for $i from 0 through 3 {
         &:nth-child(#{$i + 1}n) {
-          left: ($th-size * $i) + (25px * $i) !important;
+          left: ($th-size * $i) + (25px * $i);
         }
+      }
+
+      .playlist-videos {
+        transition: all 1s $cb-anim -.5s;
+        min-height: 0;
+        max-height: 0;
+        visibility: hidden;
       }
     }
   }
@@ -72,36 +115,40 @@
   .playlist-thumbnail {
     width: $th-size;
     height: $th-size;
-    max-width: $th-size;
-    max-height: $th-size;
     min-width: $th-size;
     min-height: $th-size;
-    background-size: cover;
-    background-position: center center;
+    background: {
+      color: #000;
+      size: auto;
+      position: center center;
+      repeat: no-repeat;
+    }
     transition: all .5s $cb-anim;
     cursor: pointer;
     position: relative;
     overflow: hidden;
 
+    &:hover {
+      background-position: center left;
+    }
+
     p {
       position: absolute;
-      bottom: -50px;
+      bottom: 0;
       text-align: center;
       color: #fff;
       margin: 0;
-      padding: 10px;
+      padding: 10px 10px 0 10px;
       width: $th-size - 20px;
-      box-shadow: 0px -40px 40px -5px rgba(0, 0, 0, 0.5) inset;
       overflow: hidden;
       text-overflow: ellipsis;
-      transition: bottom .3s $cb-anim;
-    }
-
-    //.playlist-thumbnail
-    &:hover {
-      p {
-        bottom: 0;
+      transition: opacity .3s $cb-anim;
+      opacity: 1;
+      background: {
+        image: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0));
       }
+      line-height: 50px;
+      vertical-align: bottom;
     }
   }
 
@@ -112,6 +159,8 @@
     cursor: pointer;
     color: rgba(0,0,0,.7);
     transition: color .3s $cb-anim;
+    opacity: 0;
+    transition: all .1s $cb-anim;
 
     &:hover {
       color: rgba(0,0,0,1);
@@ -120,29 +169,29 @@
 
   .playlist-info {
     padding: 32px;
+    position: relative;
+    transition: all .5s $cb-anim;
     width: 100%;
 
     .input-wrapper {
       width: 750px;
       min-height: 30px;
       margin-bottom: 16px;
-
-      ng-md-icon,
-      input,
-      textarea {
-        float: left;
-      }
+      transition: all .5s $cb-anim;
+      box-sizing: border-box;
 
       ng-md-icon {
         opacity: 0;
+        float: left;
         transition: opacity .3s $cb-anim;
         margin-right: 8px;
+        margin-top: 5px;
         cursor: pointer;
       }
 
       &:hover {
         ng-md-icon {
-          opacity: 1;
+          opacity: .3;
         }
       }
     }
@@ -155,6 +204,20 @@
     input,
     textarea {
       width: 716px;
+      cursor: pointer;
+      padding: 5px 10px;
+      transition: all .2s $cb-anim;
+
+      &:focus {
+        border: 0;
+        border-bottom: 1px solid #2196F3;
+        box-sizing: border-box;
+        background: #fff;
+
+        & ~ ng-md-icon {
+          opacity: .3;
+        }
+      }
     }
 
     input[readonly],
@@ -163,15 +226,57 @@
       border: none;
       overflow: hidden;
     }
+
+    .buttons {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    .meta {
+      position: absolute;
+      bottom: 0;
+      margin-left: 25px;
+      color: #999;
+      font-size: 12px;
+
+      p {
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+
+.playlist-videos {
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  min-height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition: all 2.5s $cb-anim .5s, padding 0s $cb-anim .5s;
+
+  .videos-preloader {
+    margin: 20px auto;
   }
 
-  .playlist-videos {
-    margin: 0;
-    padding: 0;
-    max-height: 0;
-    visibility: hidden;
+  md-list-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    height: 60px;
     overflow: hidden;
-    transition: all .5s $cb-anim;
+
+    span:first-child {
+      padding-right: 10px;
+      font-size: 24px;
+      color: #aaa;
+    }
+
+    img {
+      max-height: 60px;
+      margin-right: 10px
+    }
   }
 }
 

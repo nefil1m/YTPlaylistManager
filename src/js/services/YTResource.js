@@ -1,6 +1,6 @@
 angular
   .module('YTPlaylistManager')
-  .service('YTResourceProvider', function($q, $config) {
+  .service('YTResourceProvider', function($q, $config, $rootScope) {
     var YTResourceProvider = {};
 
     YTResourceProvider.login = function() {
@@ -21,8 +21,10 @@ angular
           request.execute(function(response) {
             if(response.error) {
               def.reject(response.error);
+              console.error(response.error);
             } else {
               def.resolve(response);
+              // $rootScope.$broadcast('loggedIn');
             }
           });
         });
@@ -40,15 +42,13 @@ angular
 
       request.execute(function(response) {
         if(response.error) {
-          /*
-           *  TODO
-           *  HANDLE ERRORS
-           *
-           */
-           console.log(response)
-           def.reject();
+           console.error({
+            operationType: requestType,
+            operationParams: options,
+            error: response.error
+          });
+          def.reject();
         } else {
-          console.log(response)
           def.resolve(response);
         }
       });

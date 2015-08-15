@@ -2,9 +2,10 @@
 
 .control-panel {
   position: fixed;
-  left: 25px;
-  bottom: 25px;
+  right: 25px;
+  top: 25px;
   background-color: #eee;
+  z-index: 79;
 
   &:hover {
     width: auto;

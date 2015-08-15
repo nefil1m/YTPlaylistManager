@@ -7,10 +7,14 @@ $cb-anim: cubic-bezier(0,0,.12,1);
 $th-size: 250px;
 
 @mixin animation-mixin($animation-name, $delay, $duration) {
-  animation-name: $animation-name;
-  animation-duration: $duration;
-  animation-delay: $delay;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  animation-timing-function: $cb-anim;
+  animation: {
+    name: $animation-name;
+    duration: $duration;
+    direction: alternate;
+    delay: $delay;
+    // iteration-count: 1;
+    fill-mode: forwards;
+    timing-function: $cb-anim;
+    play-state: paused;
+  }
 }

@@ -29,14 +29,10 @@ angular
     }
 
     function stateChange(e) {
-      if(e.data == 1) {
+      if(e.data === 1) {
         $scope.playStatusIcon = 'pause';
       } else {
         $scope.playStatusIcon = 'play_arrow';
-      }
-
-      if(e.data == YT.PlayerState.BUFFERING) {
-        e.target.setPlaybackQuality($scope.videoQuality);
       }
 
       $scope.currentVideoDuration = $scope.player.getDuration();
@@ -67,6 +63,18 @@ angular
       }
     }
 
+
+
+    function loadVideo() {
+      $scope.currentVideo = channel.activePlaylist.videos[channel.activeVideoIndex];
+      $scope.player.loadVideoById({
+        videoId: $scope.currentVideo.id,
+        suggestedQuality: $scope.videoQuality
+      });
+    }
+
+
+
     $scope.playPauseVideo = function() {
       if($scope.playerState === 1) {
         $scope.player.pauseVideo();
@@ -75,10 +83,14 @@ angular
       }
     };
 
+
+
     $scope.stopVideo = function() {
       $scope.player.seekTo(0);
       $scope.player.stopVideo();
     };
+
+
 
     $scope.muteVideo = function() {
       var volume = $scope.playerVolume !== 0 ? 0 : $scope.previousVolume;
@@ -88,10 +100,14 @@ angular
       changeVolumeIcon(volume);
     };
 
+
+
     $scope.adjustVolume = function() {
       $scope.player.setVolume($scope.playerVolume);
       changeVolumeIcon($scope.playerVolume);
     };
+
+
 
     $scope.init = function() {
       $scope.player = new YT.Player('player', {
@@ -114,6 +130,8 @@ angular
       });
     };
 
+
+
     $scope.changePlayingPosition = function(e) {
       var elemLeft = $('.video-progress').offset().left;
       var desiredPosition = ((e.clientX - elemLeft) * 100 / 229).toFixed(4);
@@ -123,29 +141,29 @@ angular
       $scope.player.seekTo(setTo);
     };
 
+
+
     $scope.previousVideo = function() {
       channel.activeVideoIndex--;
       if(channel.activeVideoIndex < 0) {
         channel.activeVideoIndex = channel.activePlaylist.videos.length - 1;
       }
-      $scope.currentVideo = channel.activePlaylist.videos[channel.activeVideoIndex];
-      $scope.player.loadVideoById({
-        videoId: $scope.currentVideo.id,
-        suggestedQuality: $scope.videoQuality
-      });
+
+      loadVideo();
     };
+
+
 
     $scope.nextVideo = function() {
       channel.activeVideoIndex++;
       if(channel.activeVideoIndex >= channel.activePlaylist.videos.length) {
         channel.activeVideoIndex = 0;
       }
-      $scope.currentVideo = channel.activePlaylist.videos[channel.activeVideoIndex];
-      $scope.player.loadVideoById({
-        videoId: $scope.currentVideo.id,
-        suggestedQuality: $scope.videoQuality
-      });
+
+      loadVideo();
     };
+
+
 
     $interval(function() {
       if($scope.playerState === 1) {

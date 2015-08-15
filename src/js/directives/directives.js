@@ -16,9 +16,10 @@ angular
 
         function mousemove(e) {
           elemToDrag.css({
-            'left': e.clientX,
-            'top': e.clientY,
-            'bottom': 'auto'
+            'left': e.clientX - 10,
+            'top': e.clientY - 10,
+            'bottom': 'auto',
+            'right': 'auto'
           });
         }
 
@@ -54,5 +55,25 @@ angular
       replace: true,
       templateUrl: 'assets/templates/playlist.html',
       controller: 'playlistCtrl'
+    }
+  })
+
+  .directive('lock', function() {
+    return {
+      restrict: 'A',
+      replace: false,
+      link: function(scope, elem, attrs) {
+        var inputs = elem.find('input, textarea');
+
+        elem.attr('readonly', true);
+
+        $(elem).on('focus', function() {
+          elem.attr('readonly', false);
+        });
+
+        $(elem).on('blur', function() {
+          elem.attr('readonly', true);
+        });
+      }
     }
   });
