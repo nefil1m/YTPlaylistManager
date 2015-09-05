@@ -7,10 +7,11 @@ angular
       var def = $q.defer();
 
       gapi.client.setApiKey = $config.API_KEY;
+
       gapi.auth.authorize({
         client_id: $config.CLIENT_ID,
         scope: $config.SCOPE,
-        immediate: true
+        immediate: false
       }, function() {
         gapi.client.load('youtube', 'v3', function() {
           var request = gapi.client.youtube.channels.list({
@@ -20,11 +21,9 @@ angular
 
           request.execute(function(response) {
             if(response.error) {
-              def.reject(response.error);
-              console.error(response.error);
+              def.reject(response);
             } else {
               def.resolve(response);
-              // $rootScope.$broadcast('loggedIn');
             }
           });
         });

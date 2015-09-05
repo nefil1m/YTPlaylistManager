@@ -70,6 +70,7 @@ angular
 
 
     $scope.getPlaylists = function() {
+      console.log('fetching')
       var options = {
         channelId: channel.basicInfo.userId,
         part: 'snippet,contentDetails,status',
@@ -116,12 +117,14 @@ angular
             item.playlistItemId = item.id;
           });
 
-          $q.all(promises).then(function() {
-            console.log('args', arguments)
-            var fetchedData = Array.prototype.slice.call([], arguments);
+          $q.all(promises).then(function(videos) {
+            // console.log('args', arguments)
+            // var fetchedData = Array.prototype.slice.call([], arguments[0]);
             // console.log('promises', promises, 'collector', collector)
-            playlist.videos = playlist.videos.concat(fetchedData);
-            console.log('success', playlist)
+            // $scope.$apply(function() {
+              playlist.videos = playlist.videos.concat(videos);
+            // });
+            // console.log('success', videos, playlist)
           });
         });
     };
@@ -141,6 +144,8 @@ angular
           // collector[index] = video;
           // console.log('inside', collector);
           promise.resolve(response.result.items[0]);
+        }, function(error) {
+          promise.reject(error);
         });
 
       return promise;

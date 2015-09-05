@@ -1,6 +1,6 @@
 angular
   .module('YTPlaylistManager')
-  .controller('sidebarCtrl', function($scope, channel, YTResourceProvider, $mdToast, $mdSidenav, $mdDialog) {
+  .controller('sidebarCtrl', function($rootScope, $scope, channel, YTResourceProvider, $mdToast, $mdSidenav, $mdDialog) {
     $scope.settingsIcon = "expand_more";
     $scope.settingsOpened = false;
 
@@ -9,12 +9,16 @@ angular
         .then(function(response) {
           var res = response.result.items[0];
 
-          $scope.info = {
+          channel.basicInfo = {
             authorized: true,
+            userId: res.id,
             username: res.snippet.title,
             profilePic: res.snippet.thumbnails.default.url,
             bgPic: res.brandingSettings.image.bannerMobileImageUrl
           };
+
+          $scope.info = channel.basicInfo;
+          $rootScope.$broadcast('loggedIn');
         }, function(response) {
           $mdToast.show(
             $mdToast.simple()

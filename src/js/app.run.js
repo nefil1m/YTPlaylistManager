@@ -1,13 +1,16 @@
 angular
   .module('YTPlaylistManager')
-  .run(function($rootScope, YTResourceProvider, channel) {
+  .run(function($rootScope, YTResourceProvider, channel, $config) {
     $(window).load(function() {
       var localOptions;
-
       $rootScope.$broadcast('pageLoaded');
 
       if(localStorage.options) {
-        localOptions = JSON.parse(localStorage.options);
+        try {
+          localOptions = JSON.parse(localStorage.options);
+        } catch(e) {
+          console.error(e);
+        }
       }
 
       if(localOptions) {
