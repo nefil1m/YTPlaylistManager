@@ -13,42 +13,45 @@
 </head>
 <body ng-controller="mainCtrl">
 
+
   <section class="player-container">
     <div id="player"></div>
     <div class="player-overlay" ng-class="{darken: !!openedPlaylist}"></div>
   </section>
 
-  <md-button ng-click="toggleSidenav()" class="md-icon-button sidenav-toggler md-primary" aria-label="menu">
-    <ng-md-icon icon="menu" size="32"></ng-md-icon>
-  </md-button>
+  <nav class="main-buttons">
+    <md-button ng-click="toggleSidenav()" class="md-icon-button sidenav-toggler" aria-label="menu">
+      <ng-md-icon icon="menu" size="32"></ng-md-icon>
+    </md-button>
+  </nav>
+
 
   <main-sidebar></main-sidebar>
 
+
   <control-panel></control-panel>
 
-  <section id="playlist-container">
 
-    <div class="playlists-row">
-      <playlist ng-repeat="playlist in playlists" />
-    </div>
-
+  <section id="playlist-container" ng-controller="playlistCtrl" flex>
+    <playlist ng-repeat="playlist in playlists" />
   </section>
 
 
   <div class="preloader-wrapper">
-    <md-progress-circular md-mode="indeterminate" class="main-preloader"></md-progress-circular>
+    <md-progress-circular md-mode="indeterminate" class="main-preloader md-primary"></md-progress-circular>
   </div>
+
 
   <script src="//localhost:35729/livereload.js"></script>
   <script src="https://apis.google.com/js/client:platform.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="assets/libs/jquery/jquery.min.js"></script>
   <script src="assets/libs/angular/angular.min.js"></script>
   <script src="assets/libs/angular-aria/angular-aria.min.js"></script>
   <script src="assets/libs/angular-animate/angular-animate.min.js"></script>
   <script src="assets/libs/angular-material/angular-material.min.js"></script>
   <script src="assets/libs/angular-material-icons/angular-material-icons.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
-  <script src="assets/libs/jquery/jquery.min.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

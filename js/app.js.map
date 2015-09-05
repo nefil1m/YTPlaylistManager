@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "file": "app.js",
+  "sources": [
+    "src/js/app.js",
+    "src/js/app.config.js",
+    "src/js/app.constants.js",
+    "src/js/app.run.js",
+    "src/js/controllers/aboutModal.js",
+    "src/js/controllers/main.js",
+    "src/js/controllers/player.js",
+    "src/js/controllers/playlist.js",
+    "src/js/controllers/sidebar.js",
+    "src/js/directives/directives.js",
+    "src/js/services/YTResource.js",
+    "src/js/services/channel.js"
+  ],
+  "names": [],
+  "mappings": "AAAA;;ACAA;;ACAA;;ACAA;;ACAA;;ACAA;;ACAA;;ACAA;;ACAA;;ACAA;;ACAA;;ACAA"
+}
